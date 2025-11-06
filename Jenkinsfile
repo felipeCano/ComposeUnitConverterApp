@@ -2,7 +2,7 @@ pipeline {
     // 1. Cambiar el agente Docker a una imagen con Android SDK
     agent {
         docker {
-            image 'rdeshpande/android-build-environment:latest'
+            image 'node:18-alpine'
             reuseNode true
         }
     }
