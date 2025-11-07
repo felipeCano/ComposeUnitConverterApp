@@ -1,17 +1,22 @@
 pipeline {
-    // 1. Cambiar el agente Docker a una imagen con Android SDK
-    agent {
-        docker {
-            image 'node:18-alpine'
-            reuseNode true
-        }
-    }
+    agent any
+
     stages {
-        stage('Build Android APK') {
+        stage('Build') {
+            agent{
+                docker{
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
             steps {
-                sh './gradlew assembleDebug'
-                sh 'ls -l app/build/outputs/apk/debug/' 
-                archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', onlyIfSuccessful: true
+                echo 'Hello World'
+                sh '''
+                    ls -la
+                    node --version
+                    npm --version
+                    ls -la
+                '''
             }
         }
     }
